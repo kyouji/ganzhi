@@ -71,6 +71,7 @@ $(function () {
             <span class="Validform_checktip">*栏目名称</span>
         </dd>
     </dl>
+    <#--
     <dl>
         <dt>图片</dt>
         <dd>
@@ -86,6 +87,7 @@ $(function () {
             <span class="Validform_checktip">*图片为277px*110px</span>
         </dd>
     </dl>
+    -->
     <dl>
         <dt>跳转地址</dt>
         <dd>

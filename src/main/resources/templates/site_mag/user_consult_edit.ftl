@@ -27,11 +27,11 @@
   <a href="/Verwalter/user/consult/list?statusId=${statusId!""}" class="back"><i></i><span>返回列表页</span></a>
   <a href="/Verwalter/center" class="home"><i></i><span>首页</span></a>
   <i class="arrow"></i>
-  <span>评论与退换货</span>
+  <span>系统设置</span>
   <i class="arrow"></i>
-  <span>商品咨询</span>
+  <span>系统管理</span>
   <i class="arrow"></i>
-  <span>回复咨询</span>
+  <span>入驻申请</span>
 </div>
 <div class="line10"></div>
 <!--/导航栏-->
@@ -41,7 +41,7 @@
   <div id="floatHead" class="content-tab">
     <div class="content-tab-ul-wrap">
       <ul>
-        <li><a href="javascript:;" onclick="tabs(this);" class="selected">回复咨询</a></li>
+        <li><a href="javascript:;" onclick="tabs(this);" class="selected">查看申请 </a></li>
       </ul>
     </div>
   </div>
@@ -49,19 +49,27 @@
 
 <div class="tab-content">
   <dl>
-    <dt>商品名称</dt>
-    <dd><#if user_consult??>${user_consult.goodsTitle!""}</#if></dd>
-  </dl>
-  <dl>
-    <dt>咨询用户</dt>
+    <dt>联系人姓名</dt>
     <dd><#if user_consult??>${user_consult.username!""}</#if></dd>
   </dl>
-  <dl>
-    <dt>咨询内容</dt>
-    <dd><#if user_consult??>${user_consult.content!""}</#if></dd>
+    <dl>
+    <dt>手机</dt>
+    <dd><#if user_consult??>${user_consult.mobile!""}</#if></dd>
+  </dl>
+    <dl>
+    <dt>邮箱</dt>
+    <dd><#if user_consult??>${user_consult.email!""}</#if></dd>
+  </dl>
+    <dl>
+    <dt>入驻人数</dt>
+    <dd><#if user_consult??>${user_consult.goodsId?c!""}</#if></dd>
   </dl>
   <dl>
-    <dt>咨询时间</dt>
+    <dt>备注留言</dt>
+    <dd><#if user_consult??><textarea rows="5" cols="50" disabled="disabled">${user_consult.content!""}</textarea></#if></dd>
+  </dl>
+  <dl>
+    <dt>申请时间</dt>
     <dd><#if user_consult??>${user_consult.consultTime!""}</#if></dd>
   </dl>
   <dl>
@@ -78,7 +86,7 @@
     </dd>
   </dl>
   <dl>
-    <dt>回复内容</dt>
+    <dt>备注</dt>
     <dd>
       <textarea name="reply" rows="2" cols="20" class="input normal"><#if user_consult??>${user_consult.reply!""}</#if></textarea>
     </dd>

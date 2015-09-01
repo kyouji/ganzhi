@@ -36,9 +36,9 @@ var theForm = document.forms['form1'];
   <a href="javascript:history.back(-1);" class="back"><i></i><span>返回上一页</span></a>
   <a href="/Verwalter/center" class="home"><i></i><span>首页</span></a>
   <i class="arrow"></i>
-  <span>评论与退换货</span>
+  <span>系统管理</span>
   <i class="arrow"></i>
-  <span>商品咨询</span>  
+  <span>入驻申请</span>  
 </div>
 <!--/导航栏-->
 
@@ -81,12 +81,9 @@ var theForm = document.forms['form1'];
                   <div class="title">
                     <span class="note">
                         <i>姓名：${consult.username!"无"}</i>
-                        <i>电话：${consult.mobile!"无"}</i>
-                        <i>email：${consult.email!"无"}</i>
-                        <i>qq：${consult.qq!"无"}</i>
                         <i>时间：${consult.consultTime!"无"}</i>
                         <i class="reply">
-                            <a href="/Verwalter/user/consult/edit?id=${consult.id}&statusId=${statusId!""}">回复</a>
+                            <a href="/Verwalter/user/consult/edit?id=${consult.id}&statusId=${statusId!""}">查看</a>
                         </i>
                     </span>
                     <b>
@@ -104,7 +101,7 @@ var theForm = document.forms['form1'];
                     ${consult.content!""}
                     <#if consult.isReplied?? && consult.isReplied>
                         <div class="answer">
-                            <b>管理员回复：</b>${consult.reply!""}
+                            <b>管理员备注：</b>${consult.reply!""}
                             <span class="time">${consult.replyTime!""}</span>
                         </div>
                     </#if>

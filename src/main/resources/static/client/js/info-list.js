@@ -1,6 +1,9 @@
 //文章内容 zhangji
 function selectContent(id,mid)
 { 
+    $(".menu_list").removeClass("sel");
+    $("#list"+id).addClass("sel");
+    
     $.ajax({
         type:"post",
         url:"/info/list/content/select",
@@ -10,11 +13,28 @@ function selectContent(id,mid)
         }       
     });
 }
+
+//选择栏目 zhangji
+function selectEntry(id,mid)
+{ 
+    $(".menu_list").removeClass("leftbar_color");
+    $("#list"+id).addClass("leftbar_color");
+    
+    $.ajax({
+        type:"post",
+        url:"/info/entry/select",
+        data:{"id":id,"mid":mid},
+        success:function(data){             
+            $(".right_content").html(data);
+        }       
+    });
+}
+
 //选择栏目 zhangji
 function selectCat(mid,catId)
 { 
-    $(".menu_list").removeClass("leftbar_color");
-    $("#list"+catId).addClass("leftbar_color");
+    $(".menu_list").removeClass("sel");
+    $("#list"+catId).addClass("sel");
 	
     $.ajax({
         type:"post",
@@ -107,4 +127,5 @@ function page2(mid,eventTarget, eventArgument)
             $(".right_content").html(data);
         }       
     });
+    
 }

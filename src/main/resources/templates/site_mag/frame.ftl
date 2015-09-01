@@ -133,7 +133,7 @@
                         ordernumberpay = data.ordernumberpay;
                         
                         if(data.consults>consultsnumber && consultsnumber !=0){
-                            alert("合作加盟有新信息！");
+                            alert("入驻申请有新信息！");
                         }
                         consultsnumber = data.consults;
                         
@@ -143,7 +143,7 @@
                         commentsnumber = data.comments;
                         
                         if(data.suggestions>suggestionsnumber && suggestionsnumber !=0){
-                            alert("有新的投诉！");
+                            alert("有新的留言！");
                         }
                         suggestionsnumber = data.suggestions;
                         

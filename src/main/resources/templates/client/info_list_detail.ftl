@@ -1,154 +1,265 @@
-
-
-<div class="right_title">
-    <a href="/">首页&nbsp;&gt;&nbsp;</a>   
-    <a href="/info/list/${menu_id}">${menu_name }</a>
-    <a><#if info_name??> > ${info_name.title!'' }<#elseif coursetake??> > 课程报名</#if></a>
-</div>    
-<#if menu_name= "新闻中心">
-	<div class="name"><#if info_name??>${info_name.title!'' }<#else>新闻中心</#if></div>
-	<dl class="news_box">
-	    <#if info_page??>
-	        <#list info_page.content as item>           
-	            <dd>
-	                <a href="javascript:selectContent(${item.id },${item.menuId })" title="">${item.title!''}</a>
-	                <span style="float:right;text-align:left;">${item.createTime!''}</span>
-	                <span style="float:right;text-align:left;">浏览次数：${item.viewCount!'0'}</span>
-	            </dd>
-	        </#list>
-	    </#if>
-	</dl>
-<#elseif menu_name="名师精英">
-    <div class="right_teacher">
-        <#if info_page??>
-            <#list info_page.content as item> 
-		        <dl class="teacher">
-		            <dt><a href="javascript:selectContent(${item.id },${item.menuId })"><img src="${item.imgUrl!''}" title="${item.brief!''}"/></a></dt>
-		            <dd><a href="javascript:selectContent(${item.id },${item.menuId })">${item.title!'' }</a></dd>
-		        </dl>
-		    </#list>
-		</#if>        
-    </div>
-<#elseif menu_name="课程设置">
-    <#if coursetake??>
-    <script type="text/javascript">
-    $(document).ready(function(){
-        
-        //初始化表单验证
-        $("#form1").Validform({
-            tiptype: 3,
-            ajaxPost:true,
-            callback: function(data) {
-                if (data.code==0)
-                {
-                    alert("提交成功");
-                    window.location.reload();
-                }
-                else
-                {
-                    alert(data.message);
-                }
-            }
-        });
-       $("#Validform_msg").hide();
-    });
-    </script> 
-    <div class="crouse_title">
-        <p style="margin-top:20px;">您选择的是 :<b style="color:#ef0000;">&nbsp;${coursetake!""}&nbsp;</b>课程</p>
-        <p style="margin-top:20px;">${info.content!'' }</p>
-        <p style="margin-top:20px;"> 请详细填写下方联系方式预约报名。</p>
-                      
-    </div>
-    <form action="/info/submit" id="form1" method="post">
-    <input type="hidden" name="courseId" value=${courseId}>
-    <input type="hidden" name="courseName" value=${coursetake}>
-    <dl class="message">
-        <dd>
-            <span><b style="color:#ef0000;">*</b>姓名 ： </span>
-            <input name="name" type="" value=""/>
-        </dd>
-        <dd>
-            <span><b style="color:#ef0000;">*</b>电话 ： </span>
-            <input name="mobile" type="" value=""/>
-        </dd>
-        <dd>
-            <span>Email ： </span>
-            <input name="mail" type="" value=""/>
-        </dd>
-        <dd>
-            <span>QQ ： </span>
-            <input name="qq" type="" value=""/>
-        </dd>
-        <dd class="message_box">
-            <span><b style="color:#ef0000;">*</b>留言 ： </span>
-            <textarea name="content" cols="" rows=""></textarea>
-            <a>可输入200字</a>
-        </dd>
-        <dd class="message_btn">
-            <input type="submit" value="报名"/>
-        </dd>
-    </dl>
-    
-    </form>
-    <#else>
-    <div class="right_crouse">
-        <#if info_page??>
-            <#list info_page.content as item> 
-		        <dl class="crouse">
-		            <dt><img src="${item.imgUrl!''}" /></dt>
-		            <dd>
-		                <a href="javascript:courseTake(${item.id },${item.menuId })">${item.title!''}</a>
-		                <#if item.brief?length lt 400>
-		                    <p>${item.brief!''}</p>
-		                <#else>
-		                    <p>${item.brief[0..400] }...</p>
-		                </#if>
-		            </dd>
-		        </dl>
-		    </#list>
-		</#if>        
-    </div>
-    </#if>
-<#elseif menu_name="招贤纳才">
-    <#if info_name.title = "人才招聘">
-    <div class="name">招贤纳才</div>
-        <#if info_page??>
-            <#list info_page.content as item>
-			    <div class="joinus_content">
-			        <h3>${item.title!''}</h3> <b style="float:right;">${item.updateTime?string("yyyy-MM-dd")!'' }</b>
-			        <div class="joinus_content2">${item.content!''}</div>
-			    </div>
-			</#list>
-		</#if>
-    <#else>
-         <h2 style="margin-top:7%;">学校地址：${site.address!'' }    
-                                   <a href="/info/map" style="  padding: 1%;
-                                                                margin-left:30%;
-								                                background-color: #008e45;
-								                                font-size:0.7em;
-								                                color: white;
-								                                border: none;">查看地图</a>
-         </h2>
-         <#if info_page??>
-             <#list info_page.content as item>
-                <dl class="news_box2">
-                    <dt><a>${item.title!''}</a></dt>
-                    <dd>${item.content!''}</dd>
-                </dl>
-            </#list>
-        </#if>     
-    </#if>    
-</#if>
-
-<!--内容底部-->
-<#if coursetake?? || (info_name?? && info_name.title?? && info_name.title == "交通指南")>
-<#else>
-<#assign PAGE_DATA=info_page />
-<#if catId??>
-    <#include "/client/list_footer.ftl" />
-<#else>
-    <#include "/client/list_footer_index.ftl" />
-</#if>   
-</#if>         
- <!--内容底部 end-->       
-         
+    	<!--面包屑导航-->
+    	<div class="crumb">
+        	<a href="/">首页</a>
+        	<#if menu_id??&menu_id !=10&menu_id!=94&menu_id!=13>
+            <i>></i>
+            <a href="/info/list/${menu_id}">${menu_name }</a>
+            </#if>
+            <#if info_name??>
+	            <i>></i>
+	            <a> ${info_name.title!'' }</a>
+            </#if>
+        </div>
+        <!--新闻列表-->
+        <#if menu_name=="最新资讯"||info_name??&info_name.title=="创客空间">
+        <ul class="news_list">
+       	    <#if info_page??>
+	       	 <#list info_page.content as item>      
+	        	<li>
+	            	<a href="javascript:selectContent(${item.id },${item.menuId })" title=""><h3>${item.title!''}</h3></a>
+	                <div class="information_home">
+	                	<span><i class="date"></i>${item.createTime?string("yyyy-MM-dd") }</span>
+	                    <span><a href='' title="浏览次数"><i class="views"></i><#if item.viewCount gt 1000>${(item.viewCount/1000)?string("0.0")}k<#else>${item.viewCount?c!'0'}</#if></a></span>
+	                    <span><a href='' title="来源"><i class="user"></i>${item.source!'本站' }</a></span>
+	                </div>
+	                <div class="news_summary">
+	                	<#if item.imgUrl??>
+	                		<a class="photo" href="javascript:selectContent(${item.id },${item.menuId })"><img src="${item.imgUrl!'' }" width=200 height=117/></a>
+	                    </#if>
+	                    <div class="news">
+	                    <p>
+	                    <#--
+	                    	<#if item.brief == "">
+		                    	<#if item.content?length lt 150>
+		                    		${item.content!'' }
+		                    	<#elseif item.content?length gt 149>
+		                    		${item.content[0..150]!'' }	...
+		                    	</#if>	
+		                    <#else>	
+		                 -->   
+		                    	<#if item.brief?length lt 300>
+		                    		${item.brief!'' }
+		                    	<#elseif item.brief?length gt 299>
+		                    		${item.brief[0..300]!'' }	...
+		                    	</#if>	
+		                   <#-- </#if>	 -->
+	                    </p>
+	                    <a class="more" href="javascript:selectContent(${item.id },${item.menuId })" title="阅读文章">查看详情 →</a>
+	                    </div>
+	                </div>
+	            </li>
+	         </#list>
+	      </#if>	            
+        </ul>
+        <#elseif menu_name == "联系我们"||menu_name == "人才招聘">
+       <ul class="contact_information">
+       	    <#if info_page??>
+	        	<#list info_page.content as item>      
+		        	<li>
+		            	<div class="department" <#if menu_name == "人才招聘">style ="font-size:16px;"</#if>>${item.title!''}</div>
+		                <div class="phone_number">
+		                	<p class="contacts">联系人：${item.source!''}</p>
+		                    <P>电&nbsp;&nbsp;&nbsp;话：${item.brief!''}</P>
+		                    <#if menu_name == "人才招聘">
+		                    	<p>${item.content!''}</p>
+		                    <#else>
+								<p>邮&nbsp;&nbsp;&nbsp;箱：${item.content!''}</P>
+							</#if>
+		                </div>
+		            </li>
+            		</#list>
+            	</#if>	
+        </ul>
+        <!--联系方式右侧二维码-->
+        <div class="wechat">
+        	<img src="${site.wxQrCode!''}" width="200px" height="200px"/>
+            <p>微信关注</p>
+        </div>
+        <!--优惠政策-->
+        <#elseif menu_name=="优惠政策"||info_name??&&info_name.title == "入驻申请"||info_name??&&info_name.title == "园区简介"||info_name??&&info_name.title == "交通路线">
+        <ul class="news_list">
+       	    <#if info_page??>
+	       	 <#list info_page.content as item>      
+	        	<li>
+	            	<a href="javascript:selectContent(${item.id },${item.menuId })" title="">${item.title!''}</a>
+	            </li>
+	         </#list>
+	         <#if info_name??&& info_name.title == "入驻申请"><li><a href="/cooperation">在线申请</a></li></#if>
+	         <#if info_name??&& info_name.title == "交通路线"><li><a href="/info/map">地图导航</a></li></#if>
+	      </#if>	            
+        </ul>
+        <#elseif menu_name == "园区概况">
+        	<#if info_name??&&info_name.title == "企业展示"|| info_name??&&info_name.title == "配套设施">
+		        <!--企业展示-->
+		        <ul class="enterprise_show">
+		            <#if info_page??>
+		           	    <#list info_page.content as item> 
+				        	<li>
+				                <a class="slr_1" href="javascript:selectContent(${item.id },${item.menuId })">
+				                     <#if item.showPictures??>
+			               				 <#list item.showPictures?split(",") as uri>
+			               				 	<#if ""!=uri && uri_index = 0>
+				                    		<img src="${uri}" width="230px" height="230px"/>
+					                        </#if>
+					                    </#list>
+					                </#if> 		                    		
+				                    <b>
+				                        <img src="${item.imgUrl!''}" width="92px" height="46px"/><span>${item.source!''}</span>
+				                        <h3>${item.title!''}</h3>
+				                        <p>	                    	
+					                        <#if item.brief?length lt 40>
+					                    		${item.brief!'' }
+					                    	<#elseif item.brief?length gt 39>
+					                    		${item.brief[0..40]!'' }	...
+					                    	</#if>	
+			                    		</p>
+				                    </b>
+				                </a>
+				            </li>
+				        </#list>
+				    </#if>        
+		    	</ul>	
+	    	<#elseif info_name??&&info_name.title == "园区荣誉">
+		        <!--园区荣誉-->
+		        <ul class="park_honors">
+		            <#if info_page??>
+		           	    <#list info_page.content as item>         	
+				        	<li>
+				            	<div><img src="${item.imgUrl!''}" width="228px" height="160px"/></div>
+				                <div class="certificate_name">${item.title!''}</div>
+				            </li>
+				        </#list>
+				    </#if>        
+		    	</ul>
+	    	</#if>
+    	<#elseif menu_name =="功能信息">
+    		<#if info_name.title == "服务体系">
+		    	<!--服务体系-->
+		        <ul class="service_system">
+		       		 <#if service_list??>
+			       	 <#list service_list as info>
+			        	<li class="li${(info_index%4)+1}">
+			            	<a href="javascript:selectContent(${info.id },${info.menuId })"><i class="i1" style="background:url(${info.imgUrl!'' }) no-repeat;"></i></a>
+			            	<a class="title" href="/info/list/content/${info.id?c!''}?mid=10">
+			                	<p class="p1">${info.title!'' }</p>
+			                    <p class="p2">${info.source!'' }</p>
+			                </a>
+			            </li>
+			         </#list>
+			      </#if>	       	            
+		        </ul>
+		    </#if>    
+		 <#elseif menu_name == "合作机构">
+		 	<#if info_name??>
+			 	<!--合作机构-->
+			        <ul class="park_honors">
+			            <#if info_page??>
+			           	    <#list info_page.content as item>         	
+					        	<li>
+					        		<a href="javascript:selectContent(${item.id },${item.menuId })" title="${item.title!''}">
+						            	<div><img src="${item.imgUrl!''}" width="228px" height="160px"/></div>
+						                <div class="certificate_name">${item.title!''}</div>
+					                </a>
+					            </li>
+					        </#list>
+					    </#if>        
+			    	</ul>
+		    	<#else>
+			     	<!--合作机构栏目-->
+			        <ul class="service_system">
+			       		 <#if work_list??>
+				       	 <#list work_list as info>
+				        	<li class="li${(info_index%4)+1}">
+				            	<a href="javascript:selectCat(${info.menuId?c},${info.id?c});"><i class="i1" style="background:url(${info.imgUrl!'' }) no-repeat;"></i></a>
+				            	<a class="title" href="javascript:selectCat(${info.menuId?c},${info.id?c});">
+				                	<p class="p1">${info.title!'' }</p>
+				                    <p class="p2">${info.content!'' }</p>
+				                </a>
+				            </li>
+				         </#list>
+				      </#if>	       	            
+			        </ul>	
+		        </#if>	    	
+	    <#elseif menu_name == "创业导师">
+				<!--创业导师-->
+		        <ul class="enterprise_show">
+		            <#if info_page??>
+		           	    <#list info_page.content as item> 
+				        	<li>
+				                <a class="slr_1" href="javascript:selectContent(${item.id },${item.menuId })">
+				                     <#if item.showPictures??>
+			               				 <#list item.showPictures?split(",") as uri>
+			               				 	<#if ""!=uri && uri_index = 0>
+				                    		<img src="${uri}" width="230px" height="230px"/>
+					                        </#if>
+					                    </#list>
+					                </#if> 		                    		
+				                    <b>
+				                        <img src="${item.imgUrl!''}" width="92px" height="46px"/><span>${item.source!''}</span>
+				                        <h3>${item.title!''}</h3>
+				                        <p>	                    	
+					                        <#if item.brief?length lt 40>
+					                    		${item.brief!'' }
+					                    	<#elseif item.brief?length gt 39>
+					                    		${item.brief[0..40]!'' }	...
+					                    	</#if>	
+			                    		</p>
+				                    </b>
+				                </a>
+				            </li>
+				        </#list>
+				    </#if>        
+		    	</ul>			           
+		<#elseif menu_name == "创客空间"&&info_name??&&info_name.title == "空间展示">
+		     <!--空间展示-->
+		        <ul class="enterprise_show">
+		            <#if info_page??>
+		           	    <#list info_page.content as item> 
+				        	<li>
+				                <a class="slr_1" href="javascript:selectContent(${item.id },${item.menuId })">
+				                     <#if item.showPictures??>
+			               				 <#list item.showPictures?split(",") as uri>
+			               				 	<#if ""!=uri && uri_index = 0>
+				                    		<img src="${uri}" width="230px" height="230px"/>
+					                        </#if>
+					                    </#list>
+					                </#if> 		                    		
+				                    <b>
+				                        <img src="${item.imgUrl!''}" width="92px" height="46px"/><span>${item.source!''}</span>
+				                        <h3>${item.title!''}</h3>
+				                        <p>	                    	
+					                        <#if item.brief?length lt 40>
+					                    		${item.brief!'' }
+					                    	<#elseif item.brief?length gt 39>
+					                    		${item.brief[0..40]!'' }	...
+					                    	</#if>	
+			                    		</p>
+				                    </b>
+				                </a>
+				            </li>
+				        </#list>
+				    </#if>        
+		    	</ul>	    
+		<#elseif menu_name == "创客空间"&&!info_name??>		    	
+		    	<!--创客空间-->
+		        <ul class="service_system">
+		       		 <#if space_list??>
+			       	 <#list space_list as info>
+			        	<li class="li${(info_index%4)+1}">
+			            	<a href="javascript:selectCat(${info.menuId?c},${info.id?c});"><i class="i1" style="background:url(${info.imgUrl!'' }) no-repeat;"></i></a>
+			            	<a class="title" href="javascript:selectCat(${info.menuId?c},${info.id?c});">
+			                	<p class="p1">${info.title!'' }</p>
+			                    <p class="p2">${info.content!'' }</p>
+			                </a>
+			            </li>
+			         </#list>
+			      </#if>	       	            
+		        </ul>			
+        </#if>
+        <!--页码-->
+        <#assign PAGE_DATA=info_page />
+		<#if catId??>
+		    <#include "/client/list_footer.ftl" />
+		<#else>
+		    <#include "/client/list_footer_index.ftl" />
+		</#if>   

@@ -22,7 +22,7 @@
 <!--main-->
 <div class="main">
 	<!--left_content-->
-	<#include "/client/common_menu_entry.ftl" />    
+	<#include "/client/common_menu.ftl" />    
     <!--right_content-->
     <div class="right_content">
         <#include "/client/info_entry_content_detail.ftl" />

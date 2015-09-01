@@ -1,507 +1,463 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<!--网页左上角小图标-->
+<link rel="shortcut icon" href="/client/images/icon.ico" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
-<title><#if site??>${site.seoTitle!''}-</#if>${site.company!''}</title>
+<title><#if site??>${site.seoTitle!''}-</#if>首页</title>
 <meta name="keywords" content="${site.seoKeywords!''}">
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
-<link rel="shortcut icon" href="/client/images/lixue.ico" />
+<!--css-->
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/main.css" rel="stylesheet" type="text/css" />
-<script src="/client/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="/client/js/pageSwitch.js"></script>
-<script>
+<!--js-->
+<script type="text/javascript" src="/client/js/jquery1.42.min.js"></script>
+<script type="text/javascript" src="/client/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="/client/js/jquery.js"></script>
 
-function joinMap()
-{
-	$(".box-info").addClass("hide");
-	$(".box-map").removeClass("hide");
-	
-	$(".map-title").addClass("map-and-join");
-	$(".join-title").removeClass("map-and-join");
-	
-}
-function mapJoin()
-{
-    $(".box-map").addClass("hide");
-    $(".box-info").removeClass("hide");
-    
-    $(".join-title").addClass("map-and-join");
-    $(".map-title").removeClass("map-and-join");
-    
-}
-	
-function news1()
-{
-    $(".news-content2").addClass("hide");
-    $(".news-content1").removeClass("hide");
-    
-    $(".news1").addClass("map-and-join");
-    $(".news2").removeClass("map-and-join");
-    
-}
-function news2()
-{
-    $(".news-content1").addClass("hide");
-    $(".news-content2").removeClass("hide");
-    
-    $(".news2").addClass("map-and-join");
-    $(".news1").removeClass("map-and-join");
-    
-}
-
+<script type="text/javascript">
+	var jQuery_1_8_2 = $.noConflict(true);
 </script>
-
 </head>
 
 <body>
-<!--header-->
 <#include "/client/common_header.ftl" />
-<!--header_end -->
 
-<!--banner-->
-<!--效果html开始-->
-<div id="wrap">
-    <div id="imgs" style="width:${adtype.width}px;height:${adtype.height}px;">
-       <#if big_scroll_ad_list??>
-            <#list big_scroll_ad_list as item>
-                <#if item_index lt 9>
-                    <div><a href="${item.linkUri!''}" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if>><img src="${item.fileUri!''}" /></a></div>
-                </#if>
-            </#list>
-        </#if>     
+<!--banner图开始-->
+<div id="slideBox" class="slideBox">
+    <!--banner点
+    <div class="hd">
+        <ul><li></li><li></li></ul>
     </div>
-    <div id="navs">
-    <a href="javascript:;" class="active"></a>
-    <a href="javascript:;"></a>
-    <a href="javascript:;"></a>
-    <a href="javascript:;"></a>
-    <a href="javascript:;"></a>
-    <a href="javascript:;"></a>
-    <a href="javascript:;"></a>
-    <a href="javascript:;"></a>
-    <a href="javascript:;"></a>
+    -->
+    <div class="bd">
+        <ul>
+            <li><a href="#"><img src="/client/images/pic1.jpg" /></a></li>
+            <li><a href="#"><img src="/client/images/pic2.jpg" /></a></li>
+        </ul>
     </div>
-    <input type="hidden" id="tssel" value="${adtype.mark!''}"/>
-   
+
+    <!-- 下面是前/后按钮代码，如果不需要删除即可 --> 
+    <a class="prev" href="javascript:void(0)"></a>
+    <a class="next" href="javascript:void(0)"></a>
+    
 </div>
-<script type="text/javascript" src="/client/js/pageSwitch.js"></script>
-<script>
-var reg=location.search.match(/ts=([^&]*)/),
-    ts=reg&&reg[1]||'${adtype.effect!''}',
-    a=new pageSwitch('imgs',{
-    duration:1000,
-    start:0,
-    direction:1,
-    loop:true,
-    ease:/flip(?!Paper)/.test(ts)?'bounce':'ease',
-    transition:ts,
-    mouse:true,
-    mousewheel:false,
-    autoplay:true,         //bool 是否自动播放幻灯 新增
-    interval:3000,    
-    arrowkey:true
-}),
-navs=document.getElementById('navs').getElementsByTagName('a');
 
-a.on('before',function(m,n){
-    navs[m].className='';
-    navs[n].className='active';
+<script type="text/javascript">
+jQuery(".slideBox").slide({mainCell:".bd ul",autoPlay:true});
+</script>
+<!--banner图结束-->
+
+<!--新闻开始-->
+<div class="news">
+	<!--通知公告-->
+	<ul>
+		<li class="title">
+	    	<h3>通知公告</h3>
+	        <a class="more" href="/info/list/8?catId=62">更多>></a>
+	    </li>
+		<#if inform_page??>
+			<#list inform_page.content as item>
+				<#if item_index lt 5>
+			    	<#if item_index == 0>
+				        <li class="news_photo">
+				            <a href="/info/list/content/${item.id?c!''}?mid=${item.menuId?c!''}">
+				            	<img src="${item.imgUrl!''}" width="380px" height="190px"/>
+				            </a>
+				            <div class="note">${item.title!''}</div>
+				        </li>
+				    <#else>
+				        <li class="news_list_1">
+				            <a href="/info/list/content/${item.id?c!''}?mid=${item.menuId?c!''}">
+					            <span>${item.title!''}</span>
+		               		    <span class="date">${item.createTime?string("yyyy-MM-dd")!''}</span>
+				            </a>
+				        </li>		
+				    </#if>
+				</#if>    
+			</#list>
+		</#if>	        	        
+    </ul>
+    <!--园区新闻-->
+	<ul>
+		<li class="title">
+	    	<h3>园区新闻</h3>
+	        <a class="more" href="/info/list/8?catId=26">更多>></a>
+	    </li>
+		<#if news_page??>
+			<#list news_page.content as item>
+				<#if item_index lt 5>
+			    	<#if item_index == 0>
+				        <li class="news_photo">
+				            <a href="/info/list/content/${item.id?c!''}?mid=${item.menuId?c!''}">
+				            	<img src="${item.imgUrl!''}"  width="380px" height="190px"/>
+				            </a>
+				            <div class="note">${item.title!''}</div>
+				        </li>
+				    <#else>
+				        <li class="news_list_1">
+				            <a href="/info/list/content/${item.id?c!''}?mid=${item.menuId?c!''}">
+					            <span>${item.title!''}</span>
+		               		    <span class="date">${item.createTime?string("yyyy-MM-dd")!''}</span>
+				            </a>
+				        </li>		
+				    </#if>
+				</#if>    
+			</#list>
+		</#if>	            	
+    </ul>
+    <!--优惠政策-->
+	<ul>
+ 		<li class="title">
+	    	<h3>优惠政策</h3>
+	        <a class="more" href="/info/list/86?catId=54">更多>></a>
+	    </li>
+		<#if policy_page??>
+			<#list policy_page.content as item>
+				<#if item_index lt 5>
+			    	<#if item_index == 0>
+				        <li class="news_photo">
+				            <a href="/info/list/content/${item.id?c!''}?mid=${item.menuId?c!''}">
+				            	<img src="${item.imgUrl!''}"  width="380px" height="190px"/>
+				            </a>
+				            <div class="note">${item.title!''}</div>
+				        </li>
+				    <#else>
+				        <li class="news_list_1">
+				            <a href="/info/list/content/${item.id?c!''}?mid=${item.menuId?c!''}">
+					            <span>${item.title!''}</span>
+		               		    <span class="date">${item.createTime?string("yyyy-MM-dd")!''}</span>
+				            </a>
+				        </li>		
+				    </#if>
+				</#if>    
+			</#list>
+		</#if>	        
+    </ul>
+</div>
+<!--新闻结束-->
+
+<!--快速通道开始-->
+<div class="expressway">
+	<div class="top">
+        <p><span>快速通道</span></p>
+        <div class="clear"></div>
+        <!-- 图片缩放 开始 -->
+        <div class="special_service">  
+            <div class="bd view view-first" onmouseover="mouseOver1()" onmouseout="mouseOut1()">
+                <a target="_blank" href="/info/list/11" class="new-product-image">
+                    <img width="190" height="190" name="image1" src="/client/images/pic-190-189.png">
+                </a>
+                <div class="mask">
+                    <h4 class="title">
+                        <a title="${profile_article.title!''}" class="text-hide" target="_blank" href="/info/list/11">园区简介</a>
+                    </h4>
+                    <i class="text">
+						<#if profile_article.brief?length lt 60>
+							${profile_article.brief!''}
+						<#elseif profile_article.brief?length gt 59>
+							${profile_article.brief[0..60]!''}...
+						</#if>	
+					</i>
+                </div>
+            </div>
+            <div class="bd view view-first" onmouseover="mouseOver2()" onmouseout="mouseOut2()">
+                <a target="_blank" href="/info/list/10?catId=52" class="new-product-image">
+                    <img width="190" height="190" name="image2" src="/client/images/pic-190-190.png">
+                </a>
+                <div class="mask">
+                    <h4 class="title">
+                        <a title="${service_article.title!''}" class="text-hide" target="_blank" href="/info/list/10?catId=52">服务体系</a>
+                    </h4>
+                    <i class="text">
+                    	<#if service_article.brief?length lt 60>
+							${service_article.brief!''}
+						<#elseif service_article.brief?length gt 59>
+							${service_article.brief[0..60]!''}...
+						</#if>	
+                    </i>
+                </div>
+            </div>
+            <div class="bd view view-first" onmouseover="mouseOver3()" onmouseout="mouseOut3()">
+                <a target="_blank" href="/info/list/86?catId=55" class="new-product-image">
+                    <img width="190" height="190" name="image3" src="/client/images/pic-190-191.png">
+                </a>
+                <div class="mask">
+                    <h4 class="title">
+                        <a title="${project_article.title!''}" class="text-hide" target="_blank" href="/info/list/86?catId=55">项目申报</a>
+                    </h4>
+                    <i class="text">
+                    	<#if project_article.brief?length lt 60>
+							${project_article.brief!''}
+						<#elseif project_article.brief?length gt 59>
+							${project_article.brief[0..60]!''}...
+						</#if>	                    
+                    </i>
+                </div>
+            </div>
+            <div class="bd view view-first" onmouseover="mouseOver4()" onmouseout="mouseOut4()">
+                <a target="_blank" href="#" class="new-product-image">
+                    <img width="190" height="190" name="image4" src="/client/images/pic-190-192.png">
+                </a>
+                <div class="mask">
+                    <h4 class="title">
+                        <a title="创客空间" class="text-hide" target="_blank" href="#">创客空间</a>
+                    </h4>
+                    <i class="text">重庆感知科技孵化器有限公司由重庆仙桃数据谷投资管理​有限公司与深圳清华研究院旗下的深圳力合天使创业投资有限公司合作设立...</i>
+                </div>
+            </div>
+            <div class="bd view view-first" onmouseover="mouseOver5()" onmouseout="mouseOut5()">
+                <a target="_blank" href="/cooperation" class="new-product-image">
+                    <img width="190" height="190" name="image5" src="/client/images/pic-190-193.png">
+                </a>
+                <div class="mask">
+                    <h4 class="title">
+                        <a title="在线申请" class="text-hide" target="_blank" href="/cooperation">在线申请</a>
+                    </h4>
+                    <i class="text">
+                    	<#if coo_article.brief?length lt 60>
+							${coo_article.brief!''}
+						<#elseif coo_article.brief?length gt 59>
+							${coo_article.brief[0..60]!''}...
+						</#if>	                   
+                    </i>
+                </div>
+            </div>
+            <script>
+				//鼠标经过
+            	function mouseOver1(){
+					document.image1.src="/client/images/pic-191-189.png";
+					}
+				//鼠标离开
+				function mouseOut1(){
+					document.image1.src="/client/images/pic-190-189.png";
+					}
+				//鼠标经过
+            	function mouseOver2(){
+					document.image2.src="/client/images/pic-191-190.png";
+					}
+				//鼠标离开
+				function mouseOut2(){
+					document.image2.src="/client/images/pic-190-190.png";
+					}
+				//鼠标经过
+            	function mouseOver3(){
+					document.image3.src="/client/images/pic-191-191.png";
+					}
+				//鼠标离开
+				function mouseOut3(){
+					document.image3.src="/client/images/pic-190-191.png";
+					}
+				//鼠标经过
+            	function mouseOver4(){
+					document.image4.src="/client/images/pic-191-192.png";
+					}
+				//鼠标离开
+				function mouseOut4(){
+					document.image4.src="/client/images/pic-190-192.png";
+					}
+				//鼠标经过
+            	function mouseOver5(){
+					document.image5.src="/client/images/pic-191-193.png";
+					}
+				//鼠标离开
+				function mouseOut5(){
+					document.image5.src="/client/images/pic-190-193.png";
+					}
+            </script>
+        </div>
+		<!-- 图片缩放 结束 -->
+    </div>
+    <div class="top">
+        <p><span>入驻企业</span></p>
+        <div class="links">
+    	<div class="links_list"><a class="link_prev" href="javascript:;" hidefocus="true" title="上一组" id="link_prev">上一组</a>
+            <div id="links">
+                <ul id="slideContainer" class="slideContainer" >
+                	<#if settle_list??>
+                		<#list settle_list as item>
+                 		    <li><a href="${item.linkUri!''}" target="_blank" title="${item.linkUri!''}"><img src="${item.imgUrl!''}"></a></li>
+                    	</#list>
+                    </#if>	
+                    
+                </ul>
+            </div>
+            <a class="link_next" href="javascript:;" hidefocus="true" title="下一组" id="link_next">下一组</a> 
+        </div>
+	</div>
+	<!--links end-->
+	<script type="text/javascript">
+            jQuery_1_8_2(function($) {
+                $('div.pro_box').hover(function() {
+                    $(this).toggleClass('pro_box_hover')
+                });
+				//c的值为每次滚动数
+                var slideContainer = $('#slideContainer'), c = 1, s_w = 110 * c, counts_l = 0, counts_r = 0, maxCounts = slideContainer.find('li').size() - 0, gameOver = true, slideCounts = 7, sTimer;
+                $('#link_prev').on('click', function() {
+                    clearInterval(sTimer);
+                    if (gameOver) {
+                        gameOver = false;
+                        counts_l++;
+                        slideContainer.animate({
+                            left: '+=' + s_w
+                        }, 500, function() {
+                            gameOver = true;
+                            slideContainer.animate({
+                                left: '-=' + s_w
+                            }, 0);
+                            var html = '';
+                            slideContainer.find('li:gt(' + (maxCounts - c - 1) + ')').each(function() {
+                                html += '<li>' + $(this).html() + '</li>';
+                            });
+                            slideContainer.find('li:gt(' + (maxCounts - c - 1) + ')').remove();
+                            slideContainer.html(html + slideContainer.html());
+                        });
+                    }
+                });
+                $('#link_next').on('click', function() {
+                    clearInterval(sTimer);
+                    link_next_event();
+                });
+
+                function link_next_event() {
+                    if (gameOver) {
+                        gameOver = false;
+                        counts_r++;
+                        slideContainer.animate({
+                            left: '-=' + s_w
+                        }, 500, function() {
+                            gameOver = true;
+                            slideContainer.animate({
+                                left: '+=' + s_w
+                            }, 0);
+                            slideContainer.find('li:lt(' + c + ')').clone().appendTo(slideContainer);
+                            slideContainer.find('li:lt(' + c + ')').remove();
+                        });
+                    }
+                }
+
+                lastCLiHtml();
+                slideContainer.find('li:gt(' + (maxCounts - 1) + ')').remove();
+                function lastCLiHtml() {
+                    var html = '';
+                    slideContainer.find('li:gt(' + (maxCounts - c - 1) + ')').each(function() {
+                        html += '<li>' + $(this).html() + '</li>';
+                    });
+                    slideContainer.html(html + slideContainer.html()).css({
+                        'margin-left': -s_w + 'px'
+                    });
+                }
+
+                var l_hover = false, m_hover = false, r_hover = false;
+                $('#links').on({
+                    'mouseover': function() {
+                        m_hover = true;
+                        clearInterval(sTimer);
+                    },
+                    'mouseout': function() {
+                        m_hover = false;
+                        isStartGo();
+                    }
+                });
+
+                $('#link_next, #link_prev').on('mouseout', function() {
+                    l_hover = false;
+                    r_hover = false;
+                    isStartGo();
+                })
+                $('#link_next, #link_prev').on('mouseover', function() {
+                    l_hover = true;
+                    r_hover = true;
+                    clearInterval(sTimer);
+                })
+                setInverterTimer();
+                function setInverterTimer() {
+                    clearInterval(sTimer);
+                    sTimer = setInterval(function() {
+                        link_next_event();
+                    }, 2000);
+                }
+
+                function isStartGo() {
+                    var st = setTimeout(function() {
+                        if (!l_hover && !m_hover && !r_hover) {
+                            setInverterTimer();
+                        }
+                    }, 1000);
+                }
+
+            });
+        </script>
+    </div>
+</div>
+<!--快速通道结束-->
+
+		<!--留言板开始-->
+<script type="text/javascript" src="/client/js/Validform_v5.3.2_min.js"></script>		
+<script>
+$(document).ready(function(){
+	$("#form1").Validform({
+	    	  tiptype:4,
+			  ajaxPost:true,
+	          callback: function (data) { 
+	   		  if (data.code == 0) {
+		          alert("提交成功");
+	              window.location.reload();
+              }
+             else {
+                alert(data.msg);
+             }
+        }
+	});
 });
 
-if(/^(?:scroll3d|flip)/.test(ts)){
-    document.getElementById('imgs').className='visible';
-}
-
-document.getElementById('tssel').onchange=function(){
-    location.href='?ts='+this.value;
-}
-
-/*
-var options=document.getElementById('tssel').options,
-    i=0,op;
-while(op=options[i++]){
-    if(op.value===ts){
-        op.selected=true;
-        break;
+   document.onkeydown = function(event){
+    if((event.keyCode || event.which) == 13){
+        $("#btn_submit").click();
     }
-}
-*/
-i=0;
-for(;i<navs.length;i++){
-    !function(i){
-        navs[i].onclick=function(){
-            a.slide(i);
-        }
-    }(i);
-}
-</script>
-<!--效果html结束-->
-    <#-- 原版
-    <img src="/client/img/20150207064229425.jpg" />
-    <ul class="banner_btn">
-        <li><a></a></li>
-        <li><a></a></li>
-        <li><a></a></li>
-        <li><a></a></li>
-    </ul>
-    -->
-</div>
-
-<!--content-->
-<div class="content">
-<!--best-->
-    <div class="best">
-        <div class="best_title"><a>金牌课程</a><p><a style=" background:none; font-size:12px; color:#999;" href="/info/list/12">更多&gt;&gt;</a></p></div>
-        <#if course_page1??>
-            <#list course_page1.content as item>
-                <#if item_index lt 4>
-			        <dl class="best_box">
-			            <dt><img src="${item.imgUrl!''}" /></dt>
-			            <dd>
-			                <span class="best_text">
-			                    <span>${item.title!''}</span>
-			                    <p>${item.brief!''}</p>
-			                </span>
-                              <a href="/info/coursechoose/content/${item.id}?mid=12" style="  float: right;
-                                                                            height: 30px;
-                                                                            width: 64px;
-                                                                            background: url(/client/images/index_btn_line.png);
-                                                                            border: none;
-                                                                            line-height: 30px;
-                                                                            text-align:center;
-                                                                            margin-right:7px;
-                                                                            color: white;"
-                                                                            title="${item.title!''}">立即报名</a>
-			            </dd>
-			        </dl>
-			    </#if>    
-		    </#list>
-		</#if>        
-    </div>
-<!--crouse-->
-    <div class="course_box">
-    <dl class="course_01">
-        <dt><a>热门课程</a><p><a style=" background:none; font-size:12px; color:#999;" href="/info/list/12">更多&gt;&gt;</a></p></dt>
-        <#if course_page2??>
-	        <#list course_page2.content as item>
-	            <#if item_index lt 10>
-	                <dd><a href="/info/coursechoose/content/${item.id}?mid=12">${item.title!''}</a></dd>
-	            </#if>    
-	        </#list>
-        </#if>     
-    </dl>
-    <dl class="course_02">
-        <dt><a>开展课程</a><p><a style=" background:none; font-size:12px; color:#999;" href="/info/list/12">更多&gt;&gt;</a></p></dt>        
-            <#if course_category_list??>
-                <#list course_category_list as list>
-                    <#if list_index = 0>
-	                    <dd>
-	                        <span>${list.title!''}</span>
-	                        <#if course_category_page0??>
-	                            <#list course_category_page0.content as item>
-	                                <#if item_index lt 3 >
-		                                <p>${item.title!''}</p>
-							            <a href="/info/coursechoose/content/${item.id}?mid=12">详情</a>
-							            <a href="/info/coursechoose/content/${item.id}?mid=12" style="  float: right;
-																									  height: 30px;
-																									  width: 64px;
-																									  background: url(/client/images/index_btn_line.png);
-																									  border: none;
-																									  line-height: 30px;
-																									  text-align:center;
-																									  color: white;">立即报名</a>
-							        </#if>
-							    </#list>
-							</#if>            
-	                    </dd>  
-                    </#if>  
-                    <#if list_index = 1>
-                        <dd>
-                            <span>${list.title!''}</span>
-                            <#if course_category_page1??>
-                                <#list course_category_page1.content as item>
-                                    <#if item_index lt 3 >
-                                        <p>${item.title!''}</p>
-                                        <a href="/info/coursechoose/content/${item.id}?mid=12">详情</a>
-                                                                                <a href="/info/coursechoose/content/${item.id}?mid=12" style="  float: right;
-                                                                                                      height: 30px;
-                                                                                                      width: 64px;
-                                                                                                      background: url(/client/images/index_btn_line.png);
-                                                                                                      border: none;
-                                                                                                      line-height: 30px;
-                                                                                                      text-align:center;
-                                                                                                      color: white;">立即报名</a>
-                                    </#if>
-                                </#list>
-                            </#if>            
-                        </dd>  
-                    </#if>  
-                </#list>
-            </#if>        
-    </dl>
-    <dl class="course_03">
-        <dt><a>最新课程</a><p><a style=" background:none; font-size:12px; color:#999;" href="/info/list/12">更多&gt;&gt;</a></p></dt>
-        <#if course_list??>
-            <#list course_list as list>
-                <#if list_index lt 10>
-                    <dd><a href="/info/coursechoose/content/${list.id}?mid=12">${list.title!''}</a></dd>
-                </#if>
-            </#list>
-        </#if>        
-    </dl>
-    </div>
-
-<!--school-->
-<div class="school">
-     <dl class="school_01">
-         <#if about_page??>
-             <#list about_page.content as item>
-                 <#if item_index = 0>
-			        <dt><a>${item.title!''}</a><p><a style=" background:none; font-size:12px; color:#999;" href="/info/entry/content/${item.id!''}?mid=10">更多&gt;&gt;</a></p></dt>
-			        <dd>
-			             <img src="${item.imgUrl!''}" />
-                         <#if item.content?length lt 400>
-                            ${item.content!'' }
-                         <#else>
-                            ${item.content[0..394]}...   
-                         </#if> 
-			        </dd> 
-                </#if>
-            </#list>
-        </#if> 			          
-    </dl>
-    
-    <dl class="school_02">
-         <#if about_page??>
-             <#list about_page.content as item>
-                 <#if item_index = 1>
-                     <dt><a>${item.title!''}</a><p><a style=" background:none; font-size:12px; color:#999;" href="/info/entry/content/${item.id!''}?mid=10">更多&gt;&gt;</a></p></dt>
-                     <dd>
-                         <#if item.content?length lt 195>
-			                <p>${item.content!'' }</p>
-			             <#else>
-			                <p>${item.content[0..194]}...</p>     
-			             </#if> 
-			            
-			         </dd>
-                </#if>
-            </#list>
-        </#if> 			   		               
-    </dl>
-</div>
-
-<!--index_news-->
-<div class="index_news">
-    <div class="news_01">
-        <dl class="news_box">            
-            <dt><a class="news1 map-and-join"  href="javascript:;" onclick="javascript:news1();">新闻中心</a>
-            <a class="news2"  href="javascript:;" onclick="javascript:news2();">新闻中心</a></dt>
-            <span id="news1" class="news-content1">
-            <#if news_list??>
-                <#list news_list as item>
-                    <#if item_index lt 7>
-                        <dd><a href="/info/list/content/${item.id!''}?mid=${item.menuId!''}" title="${item.brief!''}">${item.title!''}</a><p>${item.createTime?string("yyyy-MM-dd")}</p></dd>
-                    </#if>
-                </#list>
-            </#if>           
-            </span>
-            <span id="news2" class="news-content2 hide">
-            <#if news_list??>
-                <#list news_list as item>
-                    <#if item_index gt 6 && item_index lt 14>
-                        <dd><a href="/info/list/content/${item.id!''}?mid=${item.menuId!''}" title="${item.brief!''}">${item.title!''}</a><p>${item.createTime?string("yyyy-MM-dd")}</p></dd>
-                    </#if>
-                </#list>
-            </#if>  
-            </span>
-        </dl>
-        <div class="news_more"><span></span><a href="/info/list/8">更多&gt;&gt;</a><span></span></div>
-    </div>
-    <div class="news_02">
-        <dl class="news_box">
-            <dt><a class="join-title map-and-join" href="javascript:;" onclick="javascript:mapJoin();">招聘信息</a>
-                <a class="map-title" href="javascript:;" onclick="javascript:joinMap();">交通指南</a></dt>
-            <span id = "box-info" class="box-info"> 
-            <#if join_page??>
-                <#list join_page.content as item>
-                    <#if item_index lt 7>
-                        <dd><a href="/info/list/13?catId=48" title="${item.brief!''}">${item.title!''}</a><p>${item.updateTime?string("yyyy-MM-dd") }</p></dd>
-                    </#if>
-                </#list>
-            </#if>
-            </span>
-            <span id = "box-map" class="box-map hide">
-                 
-	                 <h2 style="margin-top:7%;margin-left:20px;">学校地址：${site.address!'' }    
-	                                   <a href="/info/map" style="  padding: 1%;
-	                                                                margin-left:5%;
-	                                                                background-color: #008e45;
-	                                                                font-size:0.7em;
-	                                                                color: white;
-	                                                                border: none;">查看地图</a>
-	                 </h2>
-	       <dl class="news_box" style="margin-left:20px;">
-	       <#if map_page??>
-               <#list map_page.content as item>
-                   <#if item_index lt 1>
-	                    <dt><a style="background: url(/client/images/news_icon.png) no-repeat left;padding-left: 38px;font-size:12px;text-align:left;width:100%;margin-top:20px;">${item.title!''}</a></dt>
-	                    <#if item.content?length lt 150>
-	                    <dd>${item.content!''}</dd>
-	                    <#else>
-	                    <dd>${item.content[0..144] }...</dd>
-	                    </#if>
-                   </#if>
-               </#list>
-           </#if>        
-           </dl>
-                 
-            </span>   
-        </dl>
-        <div class="news_more"><span></span><a href="/info/list/13">更多&gt;&gt;</a><span></span></div>
-    </div>
-</div>
-
-<!--active-->
-<div class="active">
-      <#if about_page??>
-         <#list about_page.content as item>
-             <#if item_index = 2>
-             <div class="active_title"><a>学校风采</a><p><a style=" background:none; font-size:12px; color:#999;" href="/info/entry/content/${item.id!''}?mid=10">更多&gt;&gt;</a></p></div>
-                  <#if item.showPictures??>
-                  <#list item.showPictures?split(",") as uri>
-                      <#if ""!=uri && uri_index < 4>
-                          <dl class="active_box">
-                             <dt><img src="${uri!'' }" /></dt> 
-                          </dl> 
-                      </#if>
-                  </#list>
-                 </#if>  
-             </#if>
-         </#list>
-    </#if>       
-</div>
-
-<!--index_tea-->
-<div class="index_teacher">
-    <div class="teacher">
-        <div class="teacher_title"><a>教师简介</a><p><a style=" background:none; font-size:12px; color:#999;" href="/info/list/11">更多&gt;&gt;</a></p></div>
-        <#if teacher_page??>
-            <#list teacher_page.content as item>
-                <#if item_index lt 4>
-			        <dl class="teacher_box">
-			            <dt><a href="/info/list/content/${item.id}?mid=11"><img src="${item.imgUrl!''}" /></a></dt> 
-			            <dd><a href="/info/list/content/${item.id}?mid=11">${item.title!''}</a></dd>
-			        </dl> 
-                    </#if>
-                </#list>
-            </#if> 		
-    </div>
-    
-     <dl class="school_03">
-        <dt><a>资格培训</a><p><a style=" background:none; font-size:12px; color:#999;" href="/info/list/12">更多&gt;&gt;</a></p></dt>
-           <#if course_category_page2??>
-                <#list course_category_page2.content as item>
-                    <#if item_index lt 9 >
-                        <dd><a href="/info/coursechoose/content/${item.id}?mid=12">${item.title!''}</a></dd>
-                    </#if>
-                </#list>
-            </#if>   
-    </dl>
-</div>
-
-<!--last-->
-<div class="last">
-    <ul class="last_nav">
-        <li style="background-color:#008e45;"><a  href="#" title="">首页</a></li>
-            <#if course_category_list??>
-                <#list course_category_list as item>
-                    <#if item_index lt 7 >        
-                        <li><a  href="/info/list/12?catId=${item.id!''}" title="">${item.title!''}</a></li>
-                    </#if>
-                </#list>
-            </#if>       
-    </ul>
-
-     <dl class="school_04">
-        <dt><#if course_category_list??>
-                 <#list course_category_list as item>
-                     <#if item_index = 0>
-                         <a>${item.title!''}</a>
-                     </#if>
-                 </#list>
-             </#if>             
-            <p><a style=" background:none; font-size:12px; color:#999;" href="/info/list/12">更多&gt;&gt;</a></p></dt>
-            <#if course_category_page0??>
-                <#list course_category_page0.content as item>
-                    <#if item_index lt 9 >
-                        <dd><a href="/info/coursechoose/content/${item.id}?mid=12">${item.title!''}</a></dd>
-                    </#if>
-                </#list>
-            </#if>           
-    </dl>
-     <dl class="school_04">
-        <dt><#if course_category_list??>
-                 <#list course_category_list as item>
-                     <#if item_index = 1>
-                         <a>${item.title!''}</a>
-                     </#if>
-                 </#list>
-             </#if>     
-            <p><a style=" background:none; font-size:12px; color:#999;" href="/info/list/12">更多&gt;&gt;</a></p></dt>
-            <#if course_category_page1??>
-                <#list course_category_page1.content as item>
-                    <#if item_index lt 9 >
-                        <dd><a href="/info/coursechoose/content/${item.id}?mid=12">${item.title!''}</a></dd>
-                    </#if>
-                </#list>
-            </#if>       
-    </dl>
-
- <dl class="school_04">
-        <dt><#if course_category_list??>
-                 <#list course_category_list as item>
-                     <#if item_index = 2>
-                         <a>${item.title!''}</a>
-                     </#if>
-                 </#list>
-             </#if>
-            <p><a style=" background:none; font-size:12px; color:#999;" href="/info/list/12">更多&gt;&gt;</a></p></dt>
-            <#if course_category_page2??>
-                <#list course_category_page2.content as item>
-                    <#if item_index lt 9 >
-                        <dd><a href="/info/coursechoose/content/${item.id}?mid=12">${item.title!''}</a></dd>
-                    </#if>
-                </#list>
-            </#if>       
-    </dl>
-
- <dl class="school_04">
-        <dt><a>资料下载</a><p>更多&gt;&gt;</p></dt>
-        <#if download_list??>
-            <#list download_list as item>
-                <#if item_index lt 9>        
-                    <dd><a href="/download/data?name=${item.imgUrl!''}" title="${brief!''}">${item.title!''}</a>
-                        <a style="  float: right;
-									  height: 30px;
-									  width: 64px;
-									  background: url(/client/images/index_btn_line.png);
-									  border: none;
-									  line-height: 30px;
-									  color: white;">立即下载</a>
-                    </dd>
-                </#if>
-            </#list>
-        </#if>       
-    </dl>
-</div>
-
-</div>
-<!--footer-->
-<#include "/client/common_footer.ftl" />
-<!--footer_end-->
+   }
+</script>		
+        <div class="message_board">
+	        <form  id="form1" action="/suggestion/submit" method="post">
+				<div class="links_1 links_2">
+		        	<p>留言板</p>
+		            <p class="profile"><span>MESSAGE BOARD</span></p>
+		        </div>
+		        
+		        <div class="board">
+		                <div class="phone_num">
+		                    <input type="text" name="name" value="您的姓名" datatype="*" onfocus="if(this.value=='您的姓名'){this.value='';}" onblur="if(this.value==''){this.value='您的姓名'}"/>
+		                    <input class="phone" type="text" name="mobile" value="您的电话" datatype="m" onfocus="if(this.value=='您的电话'){this.value='';}" onblur="if(this.value==''){this.value='您的电话'}"/>
+		                    <input type="text" value="您的邮箱"name="mail" datatype="e" onfocus="if(this.value=='您的邮箱'){this.value='';}" onblur="if(this.value==''){this.value='您的邮箱'}"/>
+		                </div>
+		          	      <textarea name="content" datatype="*5-255" errormsg="请输入5到255个字符"  datatype="*" onfocus="if(this.value=='留言内容'){this.value='';}" onblur="if(this.value==''){this.value='留言内容'}">留言内容</textarea>
+		        </div>
+		        
+		        <!--提交按钮-->
+		        <input class="tj" id="btn_submit" type="submit" value="提 交" />
+		    </form>
+	        <!--友情链接-->
+	        <ul class="friend_link">
+	        	<li class="lk1" >友情链接：</li>
+               	<#if site_link_list??>
+                    <#list site_link_list as link>
+                    	<#if link_has_next>
+                        		<li><a href="${link.linkUri}" target="_blank" title="${link.linkUri}">${link.title}</a></li>
+                        <#else>
+                        	<li class="last"><a href="${link.linkUri}" target="_blank" title="${link.linkUri}">${link.title}</a></li>
+                        </#if>	
+                    </#list>
+                </#if>         
+	        </ul>
+        </div>
+        <!---留言板结束->
+        
+        <!--底部开始-->
+        <div class="foot">
+        	<p>${site.copyright!''}</p>
+        </div>
+        <!--底部结束-->
 
 </body>
 </html>

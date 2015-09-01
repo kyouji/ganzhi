@@ -42,6 +42,7 @@ $(function () {
             file_types: p.filetypes, //文件类型
             file_types_description: "JPG Images",
             file_upload_limit: "0", //一次能上传的文件数量
+            
 
             file_queue_error_handler: fileQueueError,
             file_dialog_complete_handler: fileDialogComplete,

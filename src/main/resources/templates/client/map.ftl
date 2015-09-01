@@ -1,30 +1,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<!--网页左上角小图标-->
+<link rel="shortcut icon" href="/client/images/icon.ico" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
 <title><#if site??>${site.seoTitle!''}-</#if>${menu_name!''}</title>
 <meta name="keywords" content="${site.seoKeywords!''}">
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
-<link rel="shortcut icon" href="/client/images/lixue.ico" />
-<link href="/client/css/base.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/news_body.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/news_center.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/teacher.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/teacher_center.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/course.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/join_us.css" rel="stylesheet" type="text/css" />
-
-<script type="text/javascript" src="/client/js/jquery-1.9.1.min.js"></script>
+<!--css-->
+<link href="/client/css/main.css" rel="stylesheet" type="text/css" />
+<!--js-->
+<script type="text/javascript" src="/client/js/jquery1.42.min.js"></script>
+<script type="text/javascript" src="/client/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript" src="/client/js/info-list.js"></script>
-<script src="/client/js/Validform_v5.3.2_min.js"></script>
 
 <style type="text/css">
     body, html, {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
 </style>
 
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ieC9fBD7CuIHdlTtHIRexz9T"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=wjoyKExr3DmujViBxdS36XTQ"></script>
 <script type="text/javascript">
 $(document).ready(function(){
         loadMap(${site.longitude!'102.718072'}, ${site.latitude!'25.048034'});
@@ -53,22 +49,20 @@ function loadMap(x, y)
 </script>
 </head>
 <body>
-<!--header-->
 <#include "/client/common_header.ftl" />
-<!--header_end -->
 
-<!--main-->
-<div class="main">
-    <!--left_content-->
-       <#include "/client/common_menu.ftl" />  
+<!--main开始-->
+<div class="mainBox">
+	<div class="main">
+	<#include "/client/common_menu.ftl" />  
     
     <!--right_content-->
     <div class="right_content">
-         <div id="allmap" style="height:650px;width:800px;">  
+         <div id="allmap" style="height:650px;width:800px;margin-top:30px;">  
             
          </div>
     </div>
-
+	</div>
 </div>
 <!--footer-->
 <#include "/client/common_footer.ftl" />

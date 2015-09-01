@@ -225,6 +225,12 @@ $(function () {
                 <input name="telephone" type="text" value="<#if setting??>${setting.telephone!""}</#if>" class="input normal" datatype="*0-100" sucmsg=" ">
                 <span class="Validform_checktip"></span>
             </dd>
+            <dd>
+                <input id="iOsImgUrl" name="weiboQrCode" type="text" datatype="*0-255" value="<#if setting??>${setting.weiboQrCode!""}</#if>" class="input normal upload-path">
+                <div class="upload-box upload-img"></div>
+                <span class="Validform_checktip"></span>
+                <div class="photo-list thumb_iOsImgUrl_show"></div>
+            </dd>            
         </dl>
         <dl>
             <dt>传真号码</dt>
@@ -269,6 +275,13 @@ $(function () {
                 <span class="Validform_checktip"></span>
             </dd>
         </dl>
+        <dl>
+            <dt>新浪微博</dt>
+            <dd>
+                <input name="sinaWeibo" type="text" value="<#if setting??>${setting.sinaWeibo!""}</#if>" class="input normal"  sucmsg=" ">
+                <span class="Validform_checktip"></span>
+            </dd>
+        </dl>        
         <dl>
             <dt>网站备案号</dt>
             <dd>

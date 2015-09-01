@@ -1,78 +1,228 @@
-<div class="header">
-    <img class="logo" src="${site.logoUri!'' }"/>
-    <div class="search">
-        <form action="/search" method="get">
-	        <input id="search-text" type="text" class="search_text" name="keywords" value="${keywords!keywords_list[0].title}"  onfocus="this.value='';" onblur="if(this.value==''){this.value='${keywords!keywords_list[0].title}'}"/>
-	        <input type="submit"  style="width:51px; height:41px; background-color:#008e45; color:white; font-size:14px;" value="搜索"
-	               />
-        </form>
-    </div>
-    <div class="share">
-        <div class="share_icon">
-			<!-- JiaThis Button BEGIN -->
-			<div class="jiathis_style"><span class="jiathis_txt"></span>
-			<a class="jiathis_button_qzone"></a>
-			<a class="jiathis_button_tsina"></a>
-			<a class="jiathis_button_tqq"></a>
-			<a class="jiathis_button_renren"></a>
-			<a class="jiathis_button_kaixin001"></a>
-			<a>&nbsp;</a>
-			<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
-			<a class="jiathis_counter_style"></a>
-			</div>
-			<script type="text/javascript" >
-			var jiathis_config={
-			    url:"http://www.cqlxjy.cn",
-			    summary:"重庆教育培训高素质学校",
-			    title:"好教育，到立学！立学教育培训学校 ##",
-			    shortUrl:false,
-			    hideMore:false
-			}
-			</script>
-			<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
-			<!-- JiaThis Button END -->	
-        </div>
-        <p>好教育，到立学，一键分享！</p>
-        <p>联系电话：${site.telephone!'' }</p>
-    </div>
-    <div class="mark">
-        <img src="${site.wxQrCode!''}" />
-        <p>二维码，扫一扫</p>
-    </div>
+<!--头部开始-->
+<div id="go_topnav" class="header">
+	<!--LOGO 尺寸520*100-->
+	<a class="logo" href="#"><img width="520" height="100" src="${site.logoUri!'/client/images/logo.png'}" /></a>
+    <!--<ul class="search">
+    <form>
+    	<li>
+        	<input type="text" value="邮箱/用户名" />
+            <input type="text" value="密码" />
+            <span><a href="#">登录</a><i>丨</i><a href="#">注册</a></span>
+        </li>
+        <li class="li2">
+        	<input class="searchBox" type="text" value="新闻、公告、活动" />
+            <a class="searchbox" href="#"><img src="images/search_icon.png" /></a>
+        </li>
+    </form>
+    </ul>-->
 </div>
-<!--nav-->
-<div class="main_nav">
-    <div class="right_nav">
-    <ul class="nav">
-        <#if navi_item_list??>
-            <#list navi_item_list as bar>
-                <li><a  href="${bar.linkUri}" title="">${bar.title!''}</a></li>
-            </#list>
-        </#if>
+<!--头部结束-->
+
+<!--顶部导航开始-->
+<div class="nav">
+	<ul class="menu">
+    	<li>
+    	     <#if navi_item_list??>
+                <#list navi_item_list as bar>
+                    <#if bar_index = 0>
+			            <i class="i_1"></i>
+			            <a href="${bar.linkUri}">${bar.title[0]}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ${bar.title[1]}</a>
+                    </#if>
+                </#list>
+            </#if> 			            
+        </li>
+        <li>
+            <#if navi_item_list??>
+                <#list navi_item_list as bar>
+                    <#if bar_index = 1>        
+			        	<i class="i_2"></i>
+			        	<a href="${bar.linkUri}">${bar.title}</a>
+                    </#if>
+                </#list>
+            </#if> 				        	
+            <dl>
+            	<dt></dt>
+			    <#if profile_list??>
+	                <#list profile_list as item>  
+	                	<#if item.title="园区简介">
+	                		<dd><a href="/info/list/content/151?mid=11">${item.title!'' }</a></dd>
+	                	<#else>	
+							<dd><a href="/info/list/11?catId=${item.id?c!''}">${item.title!'' }</a></dd>
+		            	</#if>
+		            </#list>
+                </#if> 	
+            </dl>
+        </li>
+        <li>
+            <#if navi_item_list??>
+                <#list navi_item_list as bar>
+                    <#if bar_index = 2>          
+			            <i class="i_3"></i>
+			            <a href="${bar.linkUri}">${bar.title}</a>
+                    </#if>
+                </#list>
+            </#if> 					            
+            <dl>
+            	<dt></dt>
+                    <#if service_list??>
+                  		<#list service_list as item>   	
+                			<dd> <a href="/info/list/content/${item.id?c!''}?mid=10">${item.title!'' }</a></dd>
+                        </#list>
+                   </#if>    	 
+            </dl>
+        </li>
+        <li>
+     	     <#if navi_item_list??>
+                <#list navi_item_list as bar>
+                    <#if bar_index = 3>       
+			        	<i class="i_4"></i>
+			            <a href="${bar.linkUri}">${bar.title}</a>
+                    </#if>
+                </#list>
+            </#if>             
+            <dl>
+            	<dt></dt>
+                    <#if news_list??>
+                  		<#list news_list as item>   	
+                			<dd> <a href="/info/list/8?catId=${item.id?c!''}">${item.title!'' }</a></dd>
+                        </#list>
+                   </#if>    
+            </dl>
+        </li>
+        <li>
+    	     <#if navi_item_list??>
+                <#list navi_item_list as bar>
+                    <#if bar_index = 4>        
+			        	<i class="i_5"></i>
+			            <a href="${bar.linkUri}">${bar.title}</a>
+                    </#if>
+                </#list>
+            </#if> 			            
+            <dl>
+            	<dt></dt>
+                    <#if policy_list??>
+                  		<#list policy_list as item>   	
+                			<dd> <a href="/info/list/86?catId=${item.id?c!''}">${item.title!'' }</a></dd>
+                        </#list>
+                   </#if>    
+            </dl>
+        </li>
+         <li>
+    	     <#if navi_item_list??>
+                <#list navi_item_list as bar>
+                    <#if bar_index = 10>        
+			        	<i class="i_11"></i>
+			            <a href="${bar.linkUri}">${bar.title}</a>
+                    </#if>
+                </#list>
+            </#if> 			            
+        </li>       
+        <li>
+    	     <#if navi_item_list??>
+                <#list navi_item_list as bar>
+                    <#if bar_index = 5>        
+			        	<i class="i_6"></i>
+			            <a href="${bar.linkUri}">${bar.title}</a>
+                    </#if>
+                </#list>
+            </#if> 			            
+            <dl>
+            	<dt></dt>
+                <#if space_list??>
+              		<#list space_list as item>              	
+						<dd> <a href="/info/list/${item.menuId}?catId=${item.id?c!''}">${item.title!''}</a></dd>
+	                </#list>
+	            </#if> 
+            </dl>
+        </li>
+        <li>
+    	     <#if navi_item_list??>
+                <#list navi_item_list as bar>
+                    <#if bar_index = 6>        
+			        	<i class="i_7"></i>
+			            <a href="${bar.linkUri}">${bar.title}</a>
+                    </#if>
+                </#list>
+            </#if> 			            
+            <dl>
+            	<dt></dt>
+                    <#if coo_list??>
+                  		<#list coo_list as item>   	
+                			<dd> <a href="/info/list/content/${item.id?c}?mid=10">${item.title!'' }</a></dd>
+                        </#list>
+                   </#if>    
+                   <dd> <a href="/cooperation">在线申请</a></dd>
+            </dl>
+        </li>
+        <li>
+     	     <#if navi_item_list??>
+                <#list navi_item_list as bar>
+                    <#if bar_index = 7>       
+        				<i class="i_8"></i>
+        			    <a href="${bar.linkUri}">${bar.title}</a>
+                    </#if>
+                </#list>
+            </#if>         
+        </li>
+        <li>
+     	     <#if navi_item_list??>
+                <#list navi_item_list as bar>
+                    <#if bar_index = 8>       
+			        	<i class="i_9"></i>
+			            <a href="${bar.linkUri}">${bar.title}</a>
+                     </#if>
+                </#list>
+            </#if>              
+            <dl>
+            	<dt></dt>
+                    <#if work_list??>
+                  		<#list work_list as item>   	
+                			<dd>  <a href="/info/list/83?catId=${item.id?c!''}">${item.title!'' }</a></dd>
+                        </#list>
+                   </#if>    
+            </dl>
+        </li>
+        <li>
+    	     <#if navi_item_list??>
+                <#list navi_item_list as bar>
+                    <#if bar_index = 9>  
+			        	<i class="i_10"></i>
+			            <a href="${bar.linkUri}">${bar.title}</a>
+                    </#if>
+                </#list>
+            </#if>   			            
+            <dl>
+            	<dt></dt>
+                    <#if contact_list??>
+                  		<#list contact_list as item>   	
+                			<dd> <a href="/info/list/89?catId=${item.id?c!''}">${item.title!'' }</a></dd>
+                			<dd> <a href="/suggestion">留言板</a></dd>
+                        </#list>
+                   </#if>    
+            </dl>
+        </li>
     </ul>
-    </div>
 </div>
-<div class="adv">
-    <dl class="adv_01">
-        <dt><a href="http://wpa.qq.com/msgrd?v=3&uin=${site.qq1!'' }&site=qq&menu=yes" title="${site.qq1!'' }"><img src="/client/images/adv_icon.png" /></a></dt>
-        <dd><a href="http://wpa.qq.com/msgrd?v=3&uin=${site.qq1!'' }&site=qq&menu=yes" title="${site.qq1!'' }">QQ在线咨询</a><img src="/client/images/about_qq_27.png" /></dd>
-    </dl>
-    <div class="adv_02">
-        <p>客服在线咨询</p>
-        <p>${site.telephone!''}</p>
-        <a href="/info/list/12" style="width: 66px;
-									  height: 26px;
-									  text-align: center;
-									  line-height: 26px;
-									  background: url(/client/images/adv_line.png);
-									  font-size: 14px;
-									  color: white;
-									  margin-top: 20px;
-									  margin-left: 68px;
-									  border: none;">立即报名</a>
-    </div>
-    <dl class="adv_03">
-        <dt><p>二维码</p><p>扫码加入</p></dt>
-        <dd><img src="${site.wxQrCode!''}"/></dd>
-    </dl>
+<!--顶部导航结束-->
+
+<!--右侧浮动导航开始-->
+<div class="floatbox">
+  <a id="BizQQWPA" href="http://wpa.qq.com/msgrd?v=3&uin=${site.qq1!''}&site=qq&menu=yes" target="_blank" title="在线咨询">
+  	<img src="/client/images/float_ico02.png" width="42" height="42" alt="在线咨询">
+  </a>
+  <a href="javascript:loginWinOpen('weixin_win','myselfbox',200);" title="微信客服">
+  	<img src="/client/images/float_ico01.png" width="42" height="42" alt="微信客服">
+  	<span><img src="${site.wxQrCode!''}"></span>
+  </a>
+  <a href="${site.sinaWeibo!''}" title="新浪微博" target="_blank" rel="nofollow">
+  	<img src="/client/images/float_ico03.png" width="42" height="42" alt="新浪微博">
+  </a>
+  <a title="服务热线">
+  	<img src="/client/images/float_ico04.png" width="42" height="42" alt="服务热线">
+  	<span><img src="${site.weiboQrCode!''}"></span>
+  </a>
+  <a href="#go_topnav" title="到顶部">
+  	<img src="/client/images/float_ico05.png" width="42" height="42" alt="到顶部">
+  </a>
 </div>
+<!--右侧浮动导航结束-->

@@ -228,6 +228,7 @@ SWFUpload.prototype.loadFlash = function () {
 
 // Private: getFlashHTML generates the object tag needed to embed the flash in to the document
 SWFUpload.prototype.getFlashHTML = function () {
+
 	// Flash Satay object syntax: http://www.alistapart.com/articles/flashsatay
 	if(navigator.userAgent.indexOf("MSIE")>0) {
 	    return ['<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="', this.movieName, '" type="application/x-shockwave-flash" data="', this.settings.flash_url, '" width="', this.settings.button_width, '" height="', this.settings.button_height, '" class="swfupload">',

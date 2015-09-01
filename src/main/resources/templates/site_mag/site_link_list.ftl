@@ -36,9 +36,9 @@ var theForm = document.forms['form1'];
   <a href="javascript:history.back(-1);" class="back"><i></i><span>返回上一页</span></a>
   <a href="/Verwalter/center" class="home"><i></i><span>首页</span></a>
   <i class="arrow"></i>
-  <span>仓库管理</span>
+  <span>友情链接管理</span>
   <i class="arrow"></i>
-  <span>仓库列表</span>  
+  <span>快速通道</span>  
 </div>
 <!--/导航栏-->
 

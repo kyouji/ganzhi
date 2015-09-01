@@ -1,26 +1,30 @@
-<div class="footer">
-    <div class="footer_box">
-    <div class="footer_box_01">
-        <img src="/client/images/footer_logo.png" />
-        <ul class="footer_coperit">
-            <li><a>合作公司：</a></li>
-                <#if site_link_list??>
-                    <#list site_link_list as link>
-                        <#if link_index lt 12> 
-                            <li><a href="${link.linkUri}" target="_blank" title="${link.title}">${link.title}</a></li>
-                        </#if>
-                    </#list>
-                </#if>         
-        </ul>
+<div class="foot">
+	<div class="address">
+        <div class="address_information">
+            <div><img src="/client/images/bottom_logo.png" /></div>
+            <div class="middle">
+            	<p>联系电话：${site.telephone!''}</p>
+				<p>公司地址：${site.address!''}</p>
+				<ul class="friend_link">
+	        	<li class="lk1">友情链接：</li>
+	               	<#if site_link_list??>
+	                    <#list site_link_list as link>
+	                    	<#if link_has_next>
+	                    		<#if link_index gt 7&& link_index%8 == 0> 
+	                        		<li class="last"><a href="${link.linkUri}" target="_blank" title="${link.linkUri}">${link.title}</a></li></br>
+	                        		<li class="last">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+	                        	<#else>
+	                        		<li><a href="${link.linkUri}" target="_blank" title="${link.linkUri}">${link.title}</a></li>
+	                        	</#if>	
+	                        <#else>
+	                        	<li class="last"><a href="${link.linkUri}" target="_blank" title="${link.linkUri}">${link.title}</a></li>
+	                        </#if>	
+	                    </#list>
+	                </#if>  
+        		</ul>
+            </div>
+            <div class="qr_code"><img src="${site.wx_qr_code!''}" /></div>
+        </div>
     </div>
-    <div class="footer_box_02"></div>
-    <div class="footer_box_03">
-        <a>地址：${site.address!''}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        电话：${site.telephone!''}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        QQ：${site.qq1!''}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   邮箱： ${site.adminEmail!''}</a>
-    </div>
-    <div class="footer_box_04"><a>免责声明:如果侵犯了你的权益，请发邮件至：${site.adminEmail!''}，我们会及时删除侵权内容，谢谢合作！</a></div>
-    <div class="footer_box_05"><a>Copyright © 2014 ${site.seoTitle!''} All Rights Reserved.</a> </div>
-    </div>
+    <p class="footer">${site.copyright!''}</p>
 </div>

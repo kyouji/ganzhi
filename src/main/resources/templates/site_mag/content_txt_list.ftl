@@ -93,7 +93,7 @@ function __doPostBack(eventTarget, eventArgument) {
         <th align="left" width="12%">所属类别</th>
         <th align="left" width="16%">发布时间</th>
         <th align="left" width="65">排序</th>
-        <th align="left" width="110">属性</th>
+        <#--<th align="left" width="110">属性</th>-->
         <th width="8%">操作</th>
     </tr>
     
@@ -107,7 +107,7 @@ function __doPostBack(eventTarget, eventArgument) {
                 <input type="hidden" name="listId" id="listId" value="${content.id}">
             </td>
             <td>${content.id!''}</td>
-            <td><a href="/Verwalter/article/edit?cid=${cid!""}&mid=${mid!""}&id=${content.id!""}&__VIEWSTATE=${__VIEWSTATE!""}">${content.title!""}</a></td>
+            <td><a href="/Verwalter/article/edit?cid=${cid!""}&mid=${mid!""}&categoryId=${categoryId!''}&id=${content.id!""}&__VIEWSTATE=${__VIEWSTATE!""}">${content.title!""}</a></td>
             <td>
                 <#if category_list?? && content.categoryId??>
                     <#list category_list as cat>
@@ -122,19 +122,9 @@ function __doPostBack(eventTarget, eventArgument) {
             <td>
                 <input name="listSortId" type="text" value="${content.sortId!""}" id="listSortId" class="sort" onkeydown="return checkNumber(event);">
             </td>
-            <td>
-              <div class="btn-tools">
-                <#--
-                <a id="rptList1_ctl01_lbtnIsMsg" title="取消评论" class="msg selected" href="javascript:__doPostBack('rptList1$ctl01$lbtnIsMsg','')"></a>
-                <a id="rptList1_ctl01_lbtnIsTop" title="设置置顶" class="top" href="javascript:__doPostBack('rptList1$ctl01$lbtnIsTop','')"></a>
-                <a id="rptList1_ctl01_lbtnIsRed" title="设置推荐" class="red" href="javascript:__doPostBack('rptList1$ctl01$lbtnIsRed','')"></a>
-                <a id="rptList1_ctl01_lbtnIsHot" title="设置热门" class="hot" href="javascript:__doPostBack('rptList1$ctl01$lbtnIsHot','')"></a>
-                <a id="rptList1_ctl01_lbtnIsSlide" title="设置幻灯片" class="pic" href="javascript:__doPostBack('rptList1$ctl01$lbtnIsSlide','')"></a>
-                -->
-              </div>
-            </td>
+
             <td align="center">
-                <a href="/Verwalter/article/edit?cid=${cid!""}&mid=${mid!""}&id=${content.id!""}&__VIEWSTATE=${__VIEWSTATE!""}">修改</a>
+                <a href="/Verwalter/article/edit?cid=${cid!""}&mid=${mid!""}&categoryId=${categoryId!''}&id=${content.id!""}&__VIEWSTATE=${__VIEWSTATE!""}">修改</a>
             </td>
         </tr>
     </#list>

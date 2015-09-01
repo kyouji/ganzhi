@@ -36,7 +36,8 @@
         $(".upload-img").each(function () {
             $(this).InitSWFUpload({ 
                 sendurl: "/Verwalter/upload", 
-                flashurl: "/mag/js/swfupload.swf"
+                flashurl: "/mag/js/swfupload.swf",
+				use_query_string:true
             });
         });
         //批量上传 zhangji
@@ -93,10 +94,11 @@
 </div>
 <input name="menuId" type="text" value='${mid!""}' style="display:none;">
 <input name="channelId" type="text" value='${cid!""}' style="display:none">
+<input name="catId" type="text" value='${categoryId!""}' style="display:none">
 <input name="id" type="text" value='<#if article??>${article.id!""}</#if>' style="display:none">
     <!--导航栏-->
     <div class="location">
-        <a href="/Verwalter/content/list?cid=${cid!""}&mid=${mid!""}" class="back"><i></i><span>
+        <a href="/Verwalter/content/list?cid=${cid!""}&mid=${mid!""}&categoryId=${categoryId!''}" class="back"><i></i><span>
             返回列表页</span></a> 
         <a href="/Verwalter/center" class="home"><i></i><span>首页</span></a>
         <i class="arrow"></i>
@@ -148,7 +150,7 @@
                 <div class="rule-multi-radio multi-radio">
                     <span id="rblStatus" style="display: none;">
                         <input type="radio" name="statusId" value="0" <#if !article?? || article?? && article.statusId?? && article.statusId==0>checked="checked"</#if> ><label>正常</label>
-                        <input type="radio" name="statusId" value="1" <#if article?? && article.statusId?? && article.statusId==1>checked="checked"</#if>><label>待审核</label>
+                       <#--> <input type="radio" name="statusId" value="1" <#if article?? && article.statusId?? && article.statusId==1>checked="checked"</#if>><label>待审核</label>-->
                         <input type="radio" name="statusId" value="2" <#if article?? && article.statusId?? && article.statusId==2>checked="checked"</#if>><label>不显示</label>
                     </span>
                 </div>
@@ -169,7 +171,7 @@
                 </div>
             </dd>
         </dl>
-        -->
+
         <#if mid=12>
         <dl>
             <dt>推荐类型</dt>
@@ -184,6 +186,7 @@
             </dd>
         </dl>
         </#if>
+                -->
         <dl>
             <dt>内容标题</dt>
             <dd>
@@ -216,7 +219,7 @@
         <dl>
             <dt>浏览次数</dt>
             <dd>
-                <input name="viewCount" type="text" value="0" value="<#if article??>${article.viewCount!""}</#if>" id="txtClick" class="input txt100" datatype="n" sucmsg=" ">
+                <input name="viewCount" type="text"  value="<#if article??>${article.viewCount?c!""}<#else>0</#if>" id="txtClick" class="input txt100" datatype="n" sucmsg=" ">
                 <span class="Validform_checktip">点击浏览该信息自动+1</span>
             </dd>
         </dl>
@@ -234,7 +237,7 @@
     
     <div class="tab-content" style="display: none;">
         <#-- 批量上传 zhangji-->
-        <#if mid = 11 || mid = 10>
+        <#if mid = 11 || mid = 10 || mid = 12|| mid = 83 ||mid == 94>
         <dl id="div_show360_container">
             <dt>展示图片</dt>
             <dd>
@@ -260,42 +263,69 @@
         </dl>
         </#if>
         <#-- 批量上传 zhangji  end-->
-        <dl>
-            <dt>调用别名</dt>
-            <dd>
-                <input name="callIndex" type="text" id="txtCallIndex" value="<#if article??>${article.callIndex!""}</#if>" class="input normal" datatype="/^\s*$|^[a-zA-Z0-9\-\_]{2,50}$/" sucmsg=" ">
-                <span class="Validform_checktip">*别名访问，非必填，不可重复</span>
-            </dd>
-        </dl>
-        <dl>
-            <dt>URL链接</dt>
-            <dd>
-                <input name="linkUrl" type="text" value="<#if article??>${article.linkUrl!""}</#if>" maxlength="255" id="txtLinkUrl" class="input normal">
-                <span class="Validform_checktip">填写后直接跳转到该网址</span>
-            </dd>
-        </dl>
         <dl id="div_source">
             <dt>
-                <span id="div_source_title">信息来源</span></dt>
-            <dd>
-                <input name="source" type="text" value="<#if article??>${article.source!""}<#else>本站</#if>" id="field_control_source" class="input normal">
-                <span id="div_source_tip" class="Validform_checktip">非必填，最多50个字符</span>
-            </dd>
+                <span id="div_source_title">
+                <#if mid == 89 ||mid ==13>
+                	联系人
+	            </span></dt>
+	            <dd>
+	                <input name="source" type="text" datatype="*" value="<#if article??>${article.source!""}</#if>" id="field_control_source" class="input normal">
+	            </dd>
+                <#elseif mid == 10>
+                	副标题
+	             </span></dt>
+	            <dd>
+	                <input name="source" type="text" value="<#if article??>${article.source!""}<#else>本站</#if>" id="field_control_source" class="input normal">
+	                <span id="div_source_tip" class="Validform_checktip">非必填，最多50个字符</span>
+	            </dd>	
+                <#elseif mid == 11||mid == 94>
+                	楼层
+	             </span></dt>
+	            <dd>
+	                <input name="source" type="text" value="<#if article??>${article.source!""}<#else>3F</#if>" id="field_control_source" class="input normal">
+	                <span id="div_source_tip" class="Validform_checktip">非必填，最多50个字符</span>
+	            </dd>		            
+                <#else>		
+                	信息来源
+                </span></dt>
+	            <dd>
+	                <input name="source" type="text" value="<#if article??>${article.source!""}<#else>本站</#if>" id="field_control_source" class="input normal">
+	                <span id="div_source_tip" class="Validform_checktip">非必填，最多50个字符</span>
+	            </dd>
+	            </#if>	
         </dl>
         
         <dl>
-            <dt>内容摘要</dt>
+            <dt>
+            <#if mid==89 || mid ==13>
+	            	电话</dt>
+	            <dd>
+	                <input name="brief" id="txtZhaiyao" class="input" datatype="m|*8-8" errormsg="请输入正确格式的电话号码" value="<#if article??>${article.brief!""}</#if>" />
+	            </dd>	
+            <#else>
+	            内容摘要</dt>
+	            <dd>
+	                <textarea name="brief" rows="2" cols="20" id="txtZhaiyao" class="input"  sucmsg=" "><#if article??>${article.brief!""}</#if></textarea>
+	                <span class="Validform_checktip">不填写则自动截取内容前512字符</span>
+	            </dd>
+            </#if>
+        </dl>
+        <#if mid==89>
+        <dl>
+            <dt>邮箱</dt>
             <dd>
-                <textarea name="brief" rows="2" cols="20" id="txtZhaiyao" class="input" datatype="*0-255" sucmsg=" "><#if article??>${article.brief!""}</#if></textarea>
-                <span class="Validform_checktip">不填写则自动截取内容前255字符</span>
+                <input name="content" datatype="e" value="<#if article??>${article.content!""}</#if>"/>
             </dd>
         </dl>
+        <#else>
         <dl>
             <dt>内容描述</dt>
             <dd>
                 <textarea name="content" class="editor" style="visibility:hidden;"><#if article??>${article.content!""}</#if></textarea>
             </dd>
         </dl>
+        </#if>
     </div>
     <div class="tab-content" style="display: none;">
         <dl>

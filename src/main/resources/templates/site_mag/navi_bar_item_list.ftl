@@ -64,11 +64,11 @@ var theForm = document.forms['form1'];
   <tr class="odd_bg">
     <th width="8%">选择</th>
     <th align="center" width="20%">名称</th>
-    <th align="center" width="10%">图标</th>
+    <#--<th align="center" width="10%">图标</th> -->
     <th align="center">跳转地址</th>
-    <th align="center" width="10%">是否使能</th>
-    <th align="center" width="10%">使用位置</th>
-    <th width="8%">排序</th>
+    <th align="center">是否使能</th>
+    <#--<th align="center" width="10%">使用位置</th>-->
+    <th align="center" width="10%">排序</th>
     <th width="6%">操作</th>
   </tr>
 
@@ -81,12 +81,12 @@ var theForm = document.forms['form1'];
                 <input type="hidden" name="listId" value="${item.id}">
             </td>
             <td align="center"><a href="/Verwalter/view/navi/edit?id=${item.id}">${item.title!""}</a></td>
-            <td align="center"><img src="${item.iconUri!''}" width="25 height="25"/></td>
+           <#-- <td align="center"><img src="${item.iconUri!''}" width="25 height="25"/></td>-->
             <td align="center">${item.linkUri!""}</td>
             <td align="center"><#if item.isEnable?? && item.isEnable>是<#else>否</#if></td>
-            <td align="center"><#if item.isTouchShow?? && item.isTouchShow>触屏<#else>PC</#if></td>
+           <#--  <td align="center"><#if item.isTouchShow?? && item.isTouchShow>触屏<#else>PC</#if></td> -->
             <td align="center">
-                <input name="listSortId" type="text" value="${item.sortId!""}" class="sort" onkeydown="return checkNumber(event);">
+                <input style="text-align:center;" name="listSortId" type="text" value="${item.sortId!""}" class="sort" onkeydown="return checkNumber(event);">
             </td>
             <td align="center">
                 <a href="/Verwalter/view/navi/edit?id=${item.id}">修改</a>
