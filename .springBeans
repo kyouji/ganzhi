@@ -7,7 +7,11 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
+<<<<<<< HEAD
 		<config>java:com.ynyes.ganzhi.Application</config>
+=======
+		<config>java:com.ynyes.kjxjr.Application</config>
+>>>>>>> branch 'master' of ssh://zhangji@192.168.20.101/home/repo/lixue.git
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

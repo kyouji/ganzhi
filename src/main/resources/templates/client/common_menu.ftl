@@ -115,8 +115,12 @@
                 </#list>
             </#if> 		
 			<ul>
-
-                <li></li>
+                <#if coo_list??>
+              		<#list coo_list as item> 
+						<li id="list${item.id}" <#if catId?? && catId== item.categoryId&&info_name??&&menu_name=="功能信息">class="sel menu_list" <#else>class="menu_list"</#if>><a href="/info/list/content/${item.id?c}?mid=10">${item.title!'' }</a></li>
+                    </#list>
+               </#if>   
+                <li class="<#if info_name??&&info_name=="在线申请">sel </#if> menu_list"><a href="/cooperation">在线申请</a></li>
 			</ul>
 			<p></p>
             

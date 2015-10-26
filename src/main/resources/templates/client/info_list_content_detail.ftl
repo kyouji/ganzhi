@@ -1,3 +1,4 @@
+
    <div class="right_content newsBox">
     	<!--面包屑导航-->
     	<div class="crumb">
@@ -72,3 +73,4 @@
 	        </dl>
 	    </#if>    
     </div>
+
