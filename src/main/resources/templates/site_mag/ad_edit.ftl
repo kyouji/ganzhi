@@ -116,6 +116,7 @@ $(function () {
             <span class="Validform_checktip"></span>
         </dd>
     </dl>
+    <#--
     <dl>
         <dt>链接地址</dt>
         <dd>
@@ -123,6 +124,7 @@ $(function () {
             <span class="Validform_checktip"></span>
         </dd>
     </dl>
+    -->
     <#--
     <dl>
         <dt>开始时间</dt>

@@ -33,8 +33,11 @@
     -->
     <div class="bd">
         <ul>
-            <li><a href="#"><img src="/client/images/pic1.jpg" /></a></li>
-            <li><a href="#"><img src="/client/images/pic2.jpg" /></a></li>
+            <#if ad_list??>
+                <#list ad_list as item>
+                    <li><a href="#"><img src="${item.fileUri!''}" /></a></li>
+                </#list>
+            </#if>
         </ul>
     </div>
 

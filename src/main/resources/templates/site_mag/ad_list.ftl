@@ -62,15 +62,10 @@ var theForm = document.forms['form1'];
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ltable">
   <tbody>
   <tr class="odd_bg">
-    <th width="8%">选择</th>
+    <th>选择</th>
     <th>广告名称</th>
-    <th align="center" width="15%">开始时间</th>
-    <th align="center" width="15%">到期时间</th>
-    <th align="center" width="10%">链接</th>
-    <th align="center" width="8%">状态</th>
-    <th align="center" width="15%">发布时间</th>
-    <th width="8%">排序</th>
-    <th width="6%">操作</th>
+    <th>排序</th>
+    <th>操作</th>
   </tr>
 
     <#if ad_page??>
@@ -82,12 +77,7 @@ var theForm = document.forms['form1'];
                     </span>
                     <input type="hidden" name="listId" id="listId" value="${item.id}">
                 </td>
-                <td><a href="/Verwalter/ad/edit?id=${item.id}">${item.title!""}</a></td>
-                <td align="center">${item.startTime!""}</td>
-                <td align="center">${item.endTime!""}</td>
-                <td align="center"><a target="_blank" href="${item.linkUri!""}">广告链接</a></td>
-                <td align="center"><#if item.isEnable?? && item.isEnable><#if item.endTime?? && item.endTime gt .now><font color="#009900">正常</font><#else><font color="#990000">过期</font></#if><#else>待审核</#if></td>
-                <td align="center">${item.createTime!""}</td>
+                <td align="center"><a href="/Verwalter/ad/edit?id=${item.id}">${item.title!""}</a></td>
                 <td align="center">
                     <input name="listSortId" type="text" value="${item.sortId!""}" class="sort" onkeydown="return checkNumber(event);">
                 </td>

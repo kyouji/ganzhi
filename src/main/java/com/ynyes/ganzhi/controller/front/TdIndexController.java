@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ynyes.ganzhi.entity.TdAd;
 import com.ynyes.ganzhi.entity.TdAdType;
 import com.ynyes.ganzhi.entity.TdArticle;
 import com.ynyes.ganzhi.entity.TdArticleCategory;
@@ -64,7 +65,7 @@ public class TdIndexController {
     
     @Autowired
     private TdSettleService tdSettleService;
-
+    
     @RequestMapping
     public String index(HttpServletRequest req, Device device, ModelMap map) {        
         
@@ -108,6 +109,10 @@ public class TdIndexController {
         //下载
         map.addAttribute("download_list", tdArticleService                   		
         		.findByMenuIdOrderByCreateTime(83L));   
+        
+        //广告管理
+        List<TdAd> ad_list = tdAdService.findByTypeIdOrderBySortIdAsc(1L);
+        map.addAttribute("ad_list", ad_list);
         
         //信息
         List<TdArticleCategory> infoList = tdArticleCategoryService
